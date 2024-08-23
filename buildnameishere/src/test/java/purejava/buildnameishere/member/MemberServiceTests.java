@@ -1,10 +1,19 @@
 package purejava.buildnameishere.member;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import purejava.buildnameishere.AppConfig;
 
 public class MemberServiceTests {
-    MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
+
+    // test실행전에 실행되는 메소드
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     void join(){
