@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import purejava.buildnameishere.AppConfig;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class ApplicatioinContextInfoTest {
     // 스프링 컨테이너
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -18,5 +22,10 @@ public class ApplicatioinContextInfoTest {
             Object bean = context.getBean(beanDefinitionName);
             System.out.println("beanDefinitionName: " + beanDefinitionName + " bean = " + bean);
         }
+        List<Integer> list = Arrays.asList(1, 2, 34, 7, 2);
+
+        list.sort((a,b)->a-b);
+
+        System.out.println("list: " + list);
     }
 }
