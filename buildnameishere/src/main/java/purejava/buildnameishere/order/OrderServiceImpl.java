@@ -1,5 +1,8 @@
 package purejava.buildnameishere.order;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import purejava.buildnameishere.AppConfig;
 import purejava.buildnameishere.discount.DiscountPolicy;
 import purejava.buildnameishere.discount.FixDiscountPolicy;
 import purejava.buildnameishere.member.Member;
@@ -13,13 +16,17 @@ public class OrderServiceImpl implements OrderService {
     //spring의 di가 필요한 이유
     //DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
-    MemberRepository memberRepository;
-    DiscountPolicy discountPolicy;
+//    MemberRepository memberRepository;
+//    DiscountPolicy discountPolicy;
 
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
+    DiscountPolicy discountPolicy = ac.getBean("discountPolicy", DiscountPolicy.class);
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
